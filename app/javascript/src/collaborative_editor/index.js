@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 
 import CollaborativeEditor from "./CollaborativeEditor";
 
@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nodes.forEach(node => {
     const data = JSON.parse(node.getAttribute("data"));
-    ReactDOM.render(<CollaborativeEditor {...data} />, node);
+    ReactDOM.render(
+      React.createElement(CollaborativeEditor, data),
+      node
+    );
   });
 });

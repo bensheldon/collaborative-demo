@@ -1,5 +1,6 @@
-import React from "react";
-import getCaretCoordinates from "textarea-caret";
+import * as React from "react";
+
+import * as getCaretCoordinates from "textarea-caret";
 
 const COLORS = [
   "#98fdc1",
@@ -38,7 +39,7 @@ export default class SelectionIndicator extends React.Component {
 
   recalculateCoordinates() {
     const { textarea, offset } = this.props;
-    const caret = getCaretCoordinates(textarea, offset);
+    const caret = getCaretCoordinates.default(textarea, offset);
     caret.top -= textarea.scrollTop;
     this.setState({ caret });
   }
@@ -97,12 +98,14 @@ export default class SelectionIndicator extends React.Component {
       backgroundColor
     };
 
-    return (
-      <div style={indicatorStyle} className="selection-indicator">
-        <div style={flagStyle} className="selection-flag">
-          {this.props.clientId}
-        </div>
-      </div>
+    return React.createElement(
+      'div',
+      { style: indicatorStyle, className: 'selection-indicator' },
+      React.createElement(
+        'div',
+        { style: flagStyle, className: 'selection-flag' },
+        this.props.clientId
+      )
     );
   }
 }
