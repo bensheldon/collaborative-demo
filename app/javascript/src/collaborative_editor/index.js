@@ -9,9 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   nodes.forEach(node => {
     const data = JSON.parse(node.getAttribute("data"));
-    ReactDOM.render(
-      React.createElement(CollaborativeEditor, data),
-      node
-    );
+    if (!data.controller) { // ignore Stimulus-controlled
+      ReactDOM.render(
+        React.createElement(CollaborativeEditor, data),
+        node
+      );
+    }
   });
 });
