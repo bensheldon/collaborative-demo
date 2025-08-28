@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import CollaborativeDocument from "./CollaborativeDocument";
 import Selections from "./Selections";
 
@@ -131,21 +131,21 @@ class CollaborativeEditor extends React.Component {
   }
 
   render() {
-    return (
-      <div className="editor">
-        <textarea
-          ref={editor => (this.editor = editor)}
-          onKeyDown={this.onKeyDown}
-          onKeyPress={this.onKeyPress}
-          className="editor-content"
-          onChange={() => undefined}
-          value={this.state.document.content}
-        />
-        <Selections
-          textarea={this.editor}
-          selections={this.state.document.selections}
-        />
-      </div>
+    return React.createElement(
+      'div',
+      { className: 'editor' },
+      React.createElement('textarea', {
+        ref: editor => (this.editor = editor),
+        onKeyDown: this.onKeyDown,
+        onKeyPress: this.onKeyPress,
+        className: 'editor-content',
+        onChange: () => undefined,
+        value: this.state.document.content
+      }),
+      React.createElement(Selections, {
+        textarea: this.editor,
+        selections: this.state.document.selections
+      })
     );
   }
 

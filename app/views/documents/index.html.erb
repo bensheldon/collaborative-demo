@@ -1,0 +1,25 @@
+<% content_for :title, "Collaborative text editor example" %>
+
+<h1 class="text-center">A collaborative text editor example</h1>
+<p class="text-center"><%= link_to "source", "https://github.com/justinweiss/collaborative-demo", target: "_blank" %></p>
+
+<h2>React</h2>
+<%= content_tag :div,
+  class: "collaborative-editor",
+  data: {
+    documentId: @document_one.id,
+    content: @document_one.content,
+    version: @document_one.version
+  }.to_json do %><% end %>
+
+<h2>Stimulus</h2>
+<%= content_tag :div,
+  class: "collaborative-editor",
+  data: {
+    controller: "collaborative-editor",
+    collaborative_editor_document_id: @document_two.id,
+    collaborative_editor_content: @document_two.content,
+    collaborative_editor_version: @document_two.version
+  } do %>
+  <textarea class="editor-content"></textarea>
+<% end %>
